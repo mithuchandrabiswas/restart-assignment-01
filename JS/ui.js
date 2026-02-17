@@ -1,11 +1,9 @@
-
-// -----Loading------
+// ----- Loading -----
 function showLoader() {
   document.getElementById("productGrid").innerHTML = "<h3>Loading...</h3>";
 }
 
-
-// -----Categories Fetching------
+// ----- Categories -----
 function renderCategories(categories) {
   const container = document.getElementById("categoryContainer");
   container.innerHTML = `<button class="active" data-category="all">All</button>`;
@@ -18,7 +16,7 @@ function renderCategories(categories) {
   });
 }
 
-// -----All Products Fetching------
+// ----- Products -----
 const grid = document.getElementById("productGrid");
 
 function renderProducts(products) {
@@ -40,7 +38,12 @@ function renderProducts(products) {
       <button class="add-cart-btn">Add to Cart</button>
     `;
 
-    // Add to Cart click
+    // ✅ DETAILS BUTTON FIX
+    card.querySelector(".details-btn").addEventListener("click", () => {
+      openDetailsModal(product);
+    });
+
+    // Add to cart
     card.querySelector(".add-cart-btn").addEventListener("click", () => {
       addToCart(product);
     });
@@ -49,22 +52,19 @@ function renderProducts(products) {
   });
 }
 
-// Cart array globally
+// ----- Cart -----
 let cart = [];
 
-// Load from localStorage if exists
 function loadCart() {
   const saved = localStorage.getItem("cart");
   if (saved) cart = JSON.parse(saved);
   updateCartCount();
 }
 
-// Save to localStorage
 function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// Add to Cart
 function addToCart(product) {
   const exists = cart.find(item => item.id === product.id);
   if (!exists) {
@@ -72,35 +72,25 @@ function addToCart(product) {
   } else {
     exists.quantity += 1;
   }
-
   updateCartCount();
   saveCart();
-  console.log("Cart Items:", cart);
 }
 
-// Update Navbar Cart Count
 function updateCartCount() {
   const cartCount = document.getElementById("cartCount");
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   cartCount.textContent = totalItems;
 }
 
-// Load cart at start
 loadCart();
 
-
-
-
-
-
-// Open Cart Modal
-const cartIcon = document.getElementById("cartIcon");
+// ----- Cart Modal -----
 const cartModal = document.getElementById("cartModal");
 const closeCart = document.getElementById("closeCart");
 const cartItemsDiv = document.getElementById("cartItems");
 const totalPriceSpan = document.getElementById("totalPrice");
 
-cartIcon.addEventListener("click", () => {
+document.querySelector(".cart").addEventListener("click", () => {
   renderCartModal();
   cartModal.classList.remove("hidden");
 });
@@ -109,10 +99,8 @@ closeCart.addEventListener("click", () => {
   cartModal.classList.add("hidden");
 });
 
-// Render Cart Items
 function renderCartModal() {
   cartItemsDiv.innerHTML = "";
-
   let total = 0;
 
   cart.forEach((item, index) => {
@@ -122,7 +110,7 @@ function renderCartModal() {
     div.className = "cart-item";
 
     div.innerHTML = `
-      <img src="${item.image}" alt="${item.title}" />
+      <img src="${item.image}" />
       <div>
         <h4>${item.title.slice(0, 20)}...</h4>
         <p>$${item.price} x ${item.quantity}</p>
@@ -131,7 +119,10 @@ function renderCartModal() {
     `;
 
     div.querySelector(".remove-btn").addEventListener("click", () => {
-      removeFromCart(index);
+      cart.splice(index, 1);
+      saveCart();
+      updateCartCount();
+      renderCartModal();
     });
 
     cartItemsDiv.appendChild(div);
@@ -140,22 +131,7 @@ function renderCartModal() {
   totalPriceSpan.textContent = total.toFixed(2);
 }
 
-// Remove item from cart
-function removeFromCart(index) {
-  cart.splice(index, 1);
-  updateCartCount();
-  saveCart();
-  renderCartModal();
-}
-
-
-
-
-
-
-
-
-// Modal Elements
+// ----- DETAILS MODAL -----
 const detailsModal = document.createElement("div");
 detailsModal.id = "detailsModal";
 detailsModal.className = "modal hidden";
@@ -164,35 +140,28 @@ document.body.appendChild(detailsModal);
 function openDetailsModal(product) {
   detailsModal.innerHTML = `
     <div class="modal-content">
-      <span id="closeDetails" class="close-btn">&times;</span>
-      <img src="${product.image}" alt="${product.title}" />
+      <span class="close-btn" id="closeDetails">&times;</span>
+      <img src="${product.image}" />
       <h2>${product.title}</h2>
       <p>${product.description}</p>
       <p><strong>Price: $${product.price}</strong></p>
-      <p>⭐ ${product.rating.rate} (${product.rating.count} reviews)</p>
+      <p>⭐ ${product.rating.rate} (${product.rating.count})</p>
       <button id="buyNowBtn">Buy Now</button>
       <button id="addCartModalBtn">Add to Cart</button>
     </div>
   `;
+
   detailsModal.classList.remove("hidden");
 
-  // Close modal
-  document.getElementById("closeDetails").addEventListener("click", () => {
+  document.getElementById("closeDetails").onclick = () =>
     detailsModal.classList.add("hidden");
-  });
 
-  // Add to Cart from modal
-  document.getElementById("addCartModalBtn").addEventListener("click", () => {
+  document.getElementById("addCartModalBtn").onclick = () => {
     addToCart(product);
     detailsModal.classList.add("hidden");
-  });
+  };
 
-  // Buy Now (optional)
-  document.getElementById("buyNowBtn").addEventListener("click", () => {
-    alert("Redirect to checkout for " + product.title);
-  });
+  document.getElementById("buyNowBtn").onclick = () => {
+    alert("Proceed to checkout: " + product.title);
+  };
 }
-
-
-
-
