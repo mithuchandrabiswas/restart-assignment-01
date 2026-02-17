@@ -176,3 +176,51 @@ function removeFromCart(index) {
   renderCartModal();
 }
 
+
+
+
+
+
+
+
+// Modal Elements
+const detailsModal = document.createElement("div");
+detailsModal.id = "detailsModal";
+detailsModal.className = "modal hidden";
+document.body.appendChild(detailsModal);
+
+function openDetailsModal(product) {
+  detailsModal.innerHTML = `
+    <div class="modal-content">
+      <span id="closeDetails" class="close-btn">&times;</span>
+      <img src="${product.image}" alt="${product.title}" />
+      <h2>${product.title}</h2>
+      <p>${product.description}</p>
+      <p><strong>Price: $${product.price}</strong></p>
+      <p>⭐ ${product.rating.rate} (${product.rating.count} reviews)</p>
+      <button id="buyNowBtn">Buy Now</button>
+      <button id="addCartModalBtn">Add to Cart</button>
+    </div>
+  `;
+  detailsModal.classList.remove("hidden");
+
+  // Close modal
+  document.getElementById("closeDetails").addEventListener("click", () => {
+    detailsModal.classList.add("hidden");
+  });
+
+  // Add to Cart from modal
+  document.getElementById("addCartModalBtn").addEventListener("click", () => {
+    addToCart(product);
+    detailsModal.classList.add("hidden");
+  });
+
+  // Buy Now (optional)
+  document.getElementById("buyNowBtn").addEventListener("click", () => {
+    alert("Redirect to checkout for " + product.title);
+  });
+}
+
+
+
+

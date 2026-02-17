@@ -133,7 +133,7 @@
 }
 
 
-/* Modal */
+/* Cart Modal */
 .cart-modal {
   position: fixed;
   top:0; left:0;
@@ -168,6 +168,9 @@
   align-items:center;
 }
 .cart-item img { width:50px; height:50px; object-fit:cover; margin-right:10px; }
+
+
+
 
 
 /* Newsletter */
