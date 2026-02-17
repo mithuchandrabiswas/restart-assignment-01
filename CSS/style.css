@@ -1,4 +1,4 @@
-/* Reset */
+
 * {
   margin: 0;
   padding: 0;
@@ -110,6 +110,7 @@
 /* Products */
 .products {
   padding: 40px;
+  text-align: center;
 }
 
 .product-grid {

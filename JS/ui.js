@@ -1,7 +1,11 @@
+
+// -----Loading------
 function showLoader() {
   document.getElementById("productGrid").innerHTML = "<h3>Loading...</h3>";
 }
 
+
+// -----Categories Fetching------
 function renderCategories(categories) {
   const container = document.getElementById("categoryContainer");
   container.innerHTML = `<button class="active" data-category="all">All</button>`;
@@ -14,39 +18,7 @@ function renderCategories(categories) {
   });
 }
 
-
-function renderProducts(products) {
-  const grid = document.getElementById("productGrid");
-  grid.innerHTML = "";
-
-  products.forEach(product => {
-    const card = document.createElement("div");
-    card.classList.add("product-card");
-
-    card.innerHTML = `
-      <img src="${product.image}" alt="${product.title}">
-      <h3>${product.title.slice(0, 25)}...</h3>
-      <p><strong>$${product.price}</strong></p>
-      <span class="badge">${product.category}</span>
-      <p>⭐ ${product.rating.rate}</p>
-
-      <button class="detailsBtn">Details</button>
-      <button class="cartBtn">Add to Cart</button>
-    `;
-
-    grid.appendChild(card);
-  });
-}
-
-
-
-
-
-
-
-
-
-
+// -----All Products Fetching------
 const grid = document.getElementById("productGrid");
 
 function renderProducts(products) {
