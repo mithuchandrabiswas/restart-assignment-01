@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwiftCart</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">SwiftCart</div>
+
+    <ul class="menu">
+      <li>Home</li>
+      <li>Products</li>
+      <li>About</li>
+      <li>Contact</li>
+    </ul>
+
+    <div class="cart" id="cartIcon">
+      🛒 <span id="cartCount">0</span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Best Collection For You</h1>
+      <p>Discover premium products at unbeatable prices</p>
+      <button class="btn-primary">Shop Now</button>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>Why Choose Us</h2>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>🚚 Fast Delivery</h3>
+        <p>Quick and safe delivery</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>📞 24/7 Support</h3>
+        <p>Always here for you</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔐 Secure Payment</h3>
+        <p>100% secure transactions</p>
+      </div>
+
+      <div class="feature-card">
+        <h3>🔄 Easy Return</h3>
+        <p>Hassle-free return policy</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories">
+    <h2>Categories</h2>
+    <div id="categoryContainer" class="category-buttons">
+      <!-- Dynamic Buttons -->
+      <button class="active">All</button>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products">
+    <h2>Trending Products</h2>
+
+    <div id="productGrid" class="product-grid">
+      <!-- Dynamic Product Cards -->
+    </div>
+  </section>
+
+
+  <!-- Cart Modal -->
+<div id="cartModal" class="cart-modal hidden">
+  <div class="cart-content">
+    <span id="closeCart" class="close-btn">&times;</span>
+    <h2>Your Cart</h2>
+    <div id="cartItems"></div>
+    <h3>Total: $<span id="totalPrice">0.00</span></h3>
+  </div>
+</div>
+
+
+
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <h2>Subscribe to Our Newsletter</h2>
+    <div class="newsletter-box">
+      <input type="email" placeholder="Enter your email" />
+      <button class="btn-primary">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 SwiftCart. All rights reserved.</p>
+
+    <div class="footer-links">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+    </div>
+  </footer>
+
+
+
+  <script src="/JS/api.js"></script>
+  <script src="/JS/ui.js"></script>
+  <script src="/JS/main.js"></script>
+
+
+</body>
+</html>
