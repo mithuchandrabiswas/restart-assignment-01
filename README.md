@@ -17,9 +17,9 @@
 
 ## 3) What is the difference between == and ===?
 
-`==` এটি value চেক করে, কিন্তু data type চেক করে না।
+"==" এটি value চেক করে, কিন্তু data type চেক করে না।
 
-`===` এটি value এবং data type দুটোই চেক করে।
+"===" এটি value এবং data type দুটোই চেক করে।
 
 ---
 
